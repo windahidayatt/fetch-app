@@ -1,0 +1,132 @@
+openapi: 3.0.0
+info:
+  title: Fetch App API
+  description: Fetch App API for Jabar Digital Service Software Back End Engineer Recruitment.  This API is purposed for fetch product data from resources.
+  contact:
+    name: Winda Amelia Hidayat
+    email: windahidayat27@gmail.com
+  version: 1.0.0
+servers:
+  - url: http://devapi.com
+  
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    
+paths:
+  /product:
+    description: Fetch product data
+    get:
+      description: Operation to fetch product data with new field (price IDR)
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: string
+                      example: "1"
+                    createdAt:
+                      type: string
+                      example: "2021-06-09T09:37:05.527Z"
+                    price:
+                      type: string
+                      example: "218.00"
+                    department:
+                      type: string
+                      example: "Outdoors"
+                    product:
+                      type: string
+                      example: "Salad"
+                    price_idr:
+                      type: number
+                      example: 3140878.6
+        422:
+          description: Error, uprocessable entity
+        401:
+          description: Unauthorized, needed Bearer Token as Authorization header or Bearer Token has expired
+  
+  /aggregated-product:
+    description: Fetch aggregated product data
+    get:
+      description: Operation to fetch aggregated product data (department, product, and price IDR) then order it by price ascending
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    price:
+                      type: string
+                      example: "100.00"
+                    department:
+                      type: string
+                      example: "Baby"
+                    product:
+                      type: string
+                      example: "Bacon"
+                    price_idr:
+                      type: number
+                      example: 1440770.0
+        422:
+          description: Error, uprocessable entity
+        401:
+          description: Unauthorized, needed Bearer Token as Authorization header or Bearer Token has expired
+  
+  /auth:
+    description: Authenticate JWT
+    get:
+      description: Operation to authenticate JWT is valid or not
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: Success, JWT is valid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sub:
+                    type: string
+                    example: "1234567891234567"
+                  nik:
+                    type: string
+                    minLength: 16
+                    maxLength: 16
+                    example: "1234567891234567"
+                  password:
+                    type: string
+                    maxLength: 6
+                    example: "123456"
+                  iat:
+                    type: number
+                    example: 1640004919
+                  exp:
+                    type: number
+                    example: 1640048119
+                  fresh:
+                    type: boolean
+                    example: false
+                  type:
+                    type: string
+                    example: "access"
+        422:
+          description: Error, uprocessable entity
+        401:
+          description: Unauthorized, needed Bearer Token as Authorization header or Bearer Token has expired
+          
