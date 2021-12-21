@@ -7,15 +7,15 @@ info:
     email: windahidayat27@gmail.com
   version: 1.0.0
 servers:
-  - url: http://devapi.com
-  
+  - url: http://13.250.42.248:5001/api/v1
+
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
-    
+
 paths:
   /product:
     description: Fetch product data
@@ -54,7 +54,7 @@ paths:
           description: Error, uprocessable entity
         401:
           description: Unauthorized, needed Bearer Token as Authorization header or Bearer Token has expired
-  
+
   /aggregated-product:
     description: Fetch aggregated product data
     get:
@@ -86,7 +86,7 @@ paths:
           description: Error, uprocessable entity
         401:
           description: Unauthorized, needed Bearer Token as Authorization header or Bearer Token has expired
-  
+
   /auth:
     description: Authenticate JWT
     get:
@@ -129,4 +129,3 @@ paths:
           description: Error, uprocessable entity
         401:
           description: Unauthorized, needed Bearer Token as Authorization header or Bearer Token has expired
-          
